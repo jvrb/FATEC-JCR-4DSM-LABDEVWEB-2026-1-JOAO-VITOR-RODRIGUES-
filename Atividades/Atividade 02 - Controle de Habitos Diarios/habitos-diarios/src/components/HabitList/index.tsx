@@ -12,16 +12,23 @@ export function HabitList() {
 	useEffect(() => {
 		if (categoryHabit === "all") {
 			setHabitAfterSearch(habits);
-		} else {
+		}else{
 			setHabitAfterSearch(habits.filter((h) => h.category === categoryHabit));
+			console.log(habits.filter((h) => h.category === categoryHabit))
 		}
+		console.log(categoryHabit)
 	}, [habits, categoryHabit]);
+
+	const handleCategory = (category: string) => {
+		setCategoryHabit(category)
+
+	}
 
 	return (
 		<Container>
 			<FormControl sx={{ minWidth: 150 }}>
 				<InputLabel id="category-habit">Categoria</InputLabel>
-				<Select labelId="category-habit" value={categoryHabit} onChange={(e) => setCategoryHabit(e.target.value)}>
+				<Select labelId="category-habit" value={categoryHabit} onChange={(e) => handleCategory(e.target.value)}>
 					<MenuItem value="all">Todos</MenuItem>
 					<MenuItem value="saude">Saúde</MenuItem>
 					<MenuItem value="esporte">Esporte</MenuItem>
@@ -33,7 +40,7 @@ export function HabitList() {
 					<div>Nenhum habito.</div>
 				) : (
 					habitAfterSearch.map((habit) => (
-						<ListItem>
+						<ListItem key={habit.id}>
 							<HabitItem id={habit.id} name={habit.name} category={habit.category} completed={habit.completed} />
 						</ListItem>
 					))
