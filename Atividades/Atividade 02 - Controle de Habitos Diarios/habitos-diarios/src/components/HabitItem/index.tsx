@@ -2,7 +2,7 @@ import { Button, Container, Switch } from "@mui/material";
 import { useState } from "react";
 import type { Habit } from "../../redux/habits/habit-types";
 import { useAppDispatch } from "../../redux/hooks";
-import { removeHabit } from "../../redux/habits/slice";
+import { removeHabit , editHabit} from "../../redux/habits/slice";
 
 export default function HabitItem({ id, name, category, completed }: Habit) {
 	const [idHabit, setId] = useState(id);
@@ -18,6 +18,11 @@ export default function HabitItem({ id, name, category, completed }: Habit) {
 
 	const handleEditing = () => {
 		setEditing(!editing);
+		dispatch(editHabit({
+			id: idHabit,
+			name: nameHabit,
+			category: categoryHabit
+		}))
 	};
 
 	const handleCategoryHabit = (e: any) => {

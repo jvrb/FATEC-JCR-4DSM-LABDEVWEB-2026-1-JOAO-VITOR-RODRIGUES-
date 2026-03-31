@@ -20,7 +20,7 @@ const habitsSlice = createSlice({
         removeHabit:(state, action: PayloadAction<{id: string}>) => {
             return state.filter((h) => h.id !== action.payload.id)
         },
-        editHabit: (state, action) => {
+        editHabit: (state, action: PayloadAction<{id: string, name: string, category: string} >) => {
             const habit = state.find((h) => h.id === action.payload.id)
             if(habit) {
                 habit.name = action.payload.name
